@@ -145,9 +145,11 @@ def load_data_generate_html(week_dates):
     for week_date in week_dates:
         if type(week_date) == str:
             date = datetime.datetime.strptime(week_date, '%d/%m/%Y')
-            date = date.replace(tzinfo=pytz.timezone(TIMEZONE))
+
         else:
             date = week_date
+        
+        date = date.replace(tzinfo=pytz.timezone(TIMEZONE))
 
         files = get_files_from_date(DATA_DIR, 'corona', date)
         files = [os.path.join(DATA_DIR, f) for f in files]
