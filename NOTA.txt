@@ -1,0 +1,7 @@
+Aqui é o site do boletim. O site está hospedado no Github pages. A ideia aqui é gerar um html por semana
+com os gráficos e indexar no index.html
+
+* corona.ipynb testes das visualizações
+* scraper.sh abre o scraper e mantém rodando.
+* update.sh abre o updater.py e upa pro github
+* updater.sh gera as visualizações.
