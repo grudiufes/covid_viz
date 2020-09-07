@@ -2,6 +2,6 @@ Aqui é o site do boletim. O site está hospedado no Github pages. A ideia aqui 
 com os gráficos e indexar no index.html
 
 * corona.ipynb testes das visualizações
-* scraper.sh abre o scraper e mantém rodando.
+* scraper.sh abre um terminal caso a coleta de dados não esteja rodando
 * update.sh abre o updater.py e upa pro github
 * updater.sh gera as visualizações.
