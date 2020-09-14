@@ -27,8 +27,8 @@ BULLETIN_DIR = os.path.join(SITE_DIR, 'boletins')
 TIMEZONE = 'America/Sao_Paulo'
 
 def get_files_from_date(dir_, term, date, ext='csv'):
-    if date.weekday() != 6:
-        date -= datetime.timedelta(days=(date.weekday() + 1)) # a sunday
+    date -= datetime.timedelta(days=(date.weekday())) # previous week monday
+    print(date.strftime("%d/%m/%Y"))
 
     ls = os.listdir(DATA_DIR)
 
@@ -148,7 +148,7 @@ def load_data_generate_html(week_dates):
 
         else:
             date = week_date
-        
+
         date = date.replace(tzinfo=pytz.timezone(TIMEZONE))
 
         files = get_files_from_date(DATA_DIR, 'corona', date)
@@ -231,7 +231,9 @@ def load_data_generate_html(week_dates):
 if len(sys.argv) == 2:
     date = sys.argv[3]
 else:
-    # this assumes that it's running on a monday to generate previous week graphs
-    date = (datetime.datetime.now() - datetime.timedelta(days=8))
+    # generate previous week graphs
+    now = datetime.datetime.now()
+    date = now - datetime.timedelta(days=(now.weekday() + 1))
+    print(date.strftime("%d/%m/%Y"))
 
 load_data_generate_html([date])
