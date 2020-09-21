@@ -27,9 +27,6 @@ BULLETIN_DIR = os.path.join(SITE_DIR, 'boletins')
 TIMEZONE = 'America/Sao_Paulo'
 
 def get_files_from_date(dir_, term, date, ext='csv'):
-    date -= datetime.timedelta(days=(date.weekday())) # previous week monday
-    print(date.strftime("%d/%m/%Y"))
-
     ls = os.listdir(DATA_DIR)
 
     files = []
@@ -150,6 +147,7 @@ def load_data_generate_html(week_dates):
             date = week_date
 
         date = date.replace(tzinfo=pytz.timezone(TIMEZONE))
+        date -= datetime.timedelta(days=6) # previous week monday
 
         files = get_files_from_date(DATA_DIR, 'corona', date)
         files = [os.path.join(DATA_DIR, f) for f in files]
@@ -157,6 +155,7 @@ def load_data_generate_html(week_dates):
             continue
 
         df = pd.concat([pd.read_csv(f, sep=';') for f in files], ignore_index=True)
+
         df.rename(
             columns={
                 'user.screen_name': 'user',
@@ -167,6 +166,7 @@ def load_data_generate_html(week_dates):
         )
 
         df = df[df['lang'] == 'pt']
+
         df['date'] = pd.to_datetime(df['created_at'], format='%a %b %d %H:%M:%S %z %Y')
         df['date'] = df['date'].dt.tz_convert(TIMEZONE)
         df = df[df['date'] >= date].reset_index(drop=True)
@@ -233,7 +233,6 @@ if len(sys.argv) == 2:
 else:
     # generate previous week graphs
     now = datetime.datetime.now()
-    date = now - datetime.timedelta(days=(now.weekday() + 1))
-    print(date.strftime("%d/%m/%Y"))
+    date = now - datetime.timedelta(days=(now.weekday() + 2))
 
 load_data_generate_html([date])
