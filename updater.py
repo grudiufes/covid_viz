@@ -147,7 +147,7 @@ def load_data_generate_html(week_dates):
             date = week_date
 
         date = date.replace(tzinfo=pytz.timezone(TIMEZONE))
-        date -= datetime.timedelta(days=6) # previous week monday
+        date -= datetime.timedelta(days=(date.weekday() + 1)) # sunday of that week
 
         files = get_files_from_date(DATA_DIR, 'corona', date)
         files = [os.path.join(DATA_DIR, f) for f in files]
