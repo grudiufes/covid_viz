@@ -36,8 +36,6 @@ def get_files_from_date(dir_, term, date, ext='csv'):
             files.append(file_name)
         date += datetime.timedelta(days=1)
 
-    print(files)
-    exit()
     return files
 
 def remove_url(string):
@@ -149,7 +147,8 @@ def load_data_generate_html(week_dates):
             date = week_date
 
         date = date.replace(tzinfo=pytz.timezone(TIMEZONE))
-        date -= datetime.timedelta(days=(date.weekday() + 1)) # sunday of that week
+        if date.weekday() != 6: # not a sunday
+            date -= datetime.timedelta(days=(date.weekday() + 1)) # sunday of that week
 
         files = get_files_from_date(DATA_DIR, 'corona', date)
         files = [os.path.join(DATA_DIR, f) for f in files]
