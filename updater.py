@@ -229,7 +229,7 @@ def load_data_generate_html(week_dates):
         ])
 
 if len(sys.argv) == 2:
-    date = sys.argv[3]
+    date = sys.argv[1]
 else:
     # generate previous week graphs
     now = datetime.datetime.now()
