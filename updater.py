@@ -37,6 +37,7 @@ def get_files_from_date(dir_, term, date, ext='csv'):
         date += datetime.timedelta(days=1)
 
     print(files)
+    exit()
     return files
 
 def remove_url(string):
