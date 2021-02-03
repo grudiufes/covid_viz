@@ -30,12 +30,13 @@ def get_files_from_date(dir_, term, date, ext='csv'):
     ls = os.listdir(DATA_DIR)
 
     files = []
-    for i in range(7):
+    for i in range(6):
         file_name = '{}_{}.{}'.format(term, date.strftime('%y%m%d'), ext)
         if os.path.exists(os.path.join(dir_, file_name)):
             files.append(file_name)
         date += datetime.timedelta(days=1)
 
+    print(files)
     return files
 
 def remove_url(string):
