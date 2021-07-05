@@ -6,5 +6,6 @@
 cd ~/Dados/covid_viz
 python3 updater.py $1
 git add .
+git add boletins/*
 git commit -m "Update visualization"
 git push
