@@ -4,7 +4,8 @@
 # you can run it manually and may or may not specify a date in the format "dd/mm/aaaa"
 
 cd ~/Dados/covid_viz
-python3 updater.py $1
+#python3 updater.py $1 -- this was not working without a specified date.
+python3 updater.py $(date "+%d/%m/%Y")
 git add .
 git add boletins/*
 git commit -m "Update visualization"
