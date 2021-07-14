@@ -151,6 +151,7 @@ def load_data_generate_html(week_dates):
             date -= datetime.timedelta(days=(date.weekday() + 1)) # sunday of that week
 
         files = get_files_from_date(DATA_DIR, 'corona', date)
+        print(files)
         files = [os.path.join(DATA_DIR, f) for f in files]
         if not len(files):
             continue
