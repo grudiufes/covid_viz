@@ -151,12 +151,12 @@ def load_data_generate_html(week_dates):
             date -= datetime.timedelta(days=(date.weekday() + 1)) # sunday of that week
 
         files = get_files_from_date(DATA_DIR, 'corona', date)
-        print(files)
         files = [os.path.join(DATA_DIR, f) for f in files]
         if not len(files):
             continue
 
-        df = pd.concat([pd.read_csv(f, sep=';') for f in files], ignore_index=True)
+        df_files = [pd.read_csv(f, sep=';', engine='python') for f in files]
+        df = pd.concat(df_files, ignore_index=True)
 
         df.rename(
             columns={
